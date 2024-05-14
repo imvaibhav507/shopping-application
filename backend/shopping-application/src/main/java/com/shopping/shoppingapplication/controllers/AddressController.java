@@ -34,9 +34,13 @@ public class AddressController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User fetchedUser = (User) authentication.getPrincipal();
 
-        Address fetchedAddress = addressService.getUserAddressItems(fetchedUser.getId()).get(0);
+        Address address = new Address();
+        List<Address> fetchedAddresses = addressService.getUserAddressItems(fetchedUser.getId());
+        if(!fetchedAddresses.isEmpty()) {
+            address = fetchedAddresses.get(0);
+        }
 
-        return new ResponseEntity<>(new ApiResponseModel(200, fetchedAddress), HttpStatus.OK);
+        return new ResponseEntity<>(new ApiResponseModel(200, address), HttpStatus.OK);
     }
 
     @GetMapping("/")

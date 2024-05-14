@@ -20,18 +20,18 @@ public class ShoppingApplication {
 	@Autowired
 	FavouriteService favouriteService;
 	@Autowired
-	AddressService cartService;
+	AddressService addressService;
 
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShoppingApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner runner() {
-		return runner -> {
-
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return runner -> {
+//			System.out.println(addressService.getUserAddressItems("663617e9016bdc4bce50d689"));
+//		};
+//	}
 
 }

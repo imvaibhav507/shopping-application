@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_app/models/Address.dart';
 import 'package:shop_app/routes.dart';
 import 'package:shop_app/screens/order_confirmation/controller/confirmation_controller.dart';
 import 'components/address_card.dart';
@@ -31,15 +32,16 @@ class OrderConfirmationPage extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             Obx(() {
-              final address = controller.defaultAddressModel.value.address;
               if (controller.isAddressLoading.isTrue) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
-              return AddressCard(
-                address: address,
-              );
+              final address = controller.defaultAddressModel.value.address;
+              if(address?.addressId == null) {
+                return Container();
+              }
+              return AddressCard(address: address);
             }),
             Obx(() => (controller.isPriceBreakdownLoading.isFalse)
                 ? PriceBreakDown()
@@ -49,20 +51,40 @@ class OrderConfirmationPage extends StatelessWidget {
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          child: Obx(() => (controller.selectedPaymentMode?.value == "online")
-              ? ElevatedButton(
+          child: Obx(() {
+            if(controller.defaultAddressModel.value.address?.addressId == null) {
+              return ElevatedButton(
+                  child: const Text('Add Address'),
+                  onPressed: () async {
+                    onTapAddAddress();
+                  });
+            }
+            else if(controller.selectedPaymentMode?.value == "online") {
+              return ElevatedButton(
                   child: Text('Pay Now (₹${controller.setFinalPrice()})'),
                   onPressed: () async {
                     await controller.placeOrders();
-                  })
-              : ElevatedButton(
-                  child: Text('Pay Cash (₹${controller.setFinalPrice()})'),
-                  onPressed: () async {
-                    await controller.placeOrders();
-                  })),
+                  });
+            }
+            return ElevatedButton(
+                child: Text('Pay Cash (₹${controller.setFinalPrice()})'),
+                onPressed: () async {
+                  await controller.placeOrders();
+                });
+          }),
         ),
       ),
     );
+  }
+
+  void onTapAddAddress() {
+    Get.toNamed(AppRoutes.selectAddressScreen, arguments: Address().addressId)
+        ?.then((result) async {
+      String? selectedAddressId = await result.value;
+      if (!(selectedAddressId == null || selectedAddressId == '')) {
+        controller.getDeliveryAddressById(selectedAddressId);
+      }
+    });
   }
 }
 
