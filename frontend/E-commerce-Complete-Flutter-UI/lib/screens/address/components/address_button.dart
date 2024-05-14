@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:shop_app/models/Address.dart';
+import 'package:shop_app/screens/address/controller/address_controller.dart';
+
+class AddressButton extends StatelessWidget {
+  AddressButton({super.key, this.address});
+  Address? address;
+
+  var controller = Get.find<AddressController>();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 2,vertical: 10),
+      child: Card(
+        color: Theme.of(context).cardColor,
+        elevation: 0.5,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Delivery Address',
+                      style: Theme.of(context).textTheme
+                          .titleSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text('Edit', style:Theme.of(context).textTheme
+                      .titleSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.deepOrange))
+                ],
+              ),
+              Text('${address?.name}',
+                  style: Theme.of(context).textTheme
+                      .titleSmall?.copyWith(fontWeight: FontWeight.bold)),
+              Text('${address?.house}, ${address?.road}',
+                style: Theme.of(context).textTheme.titleSmall,
+                maxLines: 4,
+              ),
+              Text('${address?.road}',
+                style: Theme.of(context).textTheme.titleSmall,
+                maxLines: 4,
+              ),
+              Row(
+                children: [
+                  Text('Pincode : ' ,style: Theme.of(context).textTheme.titleSmall),
+                  Text('${address?.pincode}' ,style: Theme.of(context).textTheme.titleSmall),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('Phone : ' ,style: Theme.of(context).textTheme.titleSmall),
+                  Text('+91-${address?.phone}' ,style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(width: 90),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

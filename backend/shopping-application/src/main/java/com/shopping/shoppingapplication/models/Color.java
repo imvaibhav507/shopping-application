@@ -1,0 +1,5 @@
+package com.shopping.shoppingapplication.models;
+
+public enum Color {
+    RED, BLUE, GREEN, YELLOW, WHITE, PINK, BLACK, GREY, ORANGE, DARK_BLUE, ROSE_WHITE, BROWN, MUSTARD, CREAM, MAROON, NAVY, DARK_GREY, LIGHT_BLUE, OLIVE, TEAL, LAVENDER, WINE, KHAAKI;
+}
