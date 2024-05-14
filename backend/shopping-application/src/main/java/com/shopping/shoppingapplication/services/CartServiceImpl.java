@@ -92,7 +92,7 @@ public class CartServiceImpl implements CartService{
 
                                 lookup()
                                         .from("products")
-                                        .localField("cartItems.productItem")
+                                        .localField("cartItems.product")
                                         .foreignField("_id")
                                         .as("product"),
 

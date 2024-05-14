@@ -38,13 +38,15 @@ class ProfileScreen extends GetWidget{
               },
             ),
             ProfileMenu(
-              text: "Settings",
-              icon: "assets/icons/Settings.svg",
-              press: () {},
+              text: "Your Orders",
+              icon: "assets/icons/shop order.svg",
+              press: () => {
+                Get.toNamed(AppRoutes.ordersScreen)
+              }
             ),
             ProfileMenu(
-              text: "Help Center",
-              icon: "assets/icons/Question mark.svg",
+              text: "Settings",
+              icon: "assets/icons/Settings.svg",
               press: () {},
             ),
             ProfileMenu(

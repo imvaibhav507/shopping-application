@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,11 +48,27 @@ public class OrderServiceImpl implements OrderService {
         OrderLine newOrderLine = mongoTemplate.insert(new OrderLine(), "orderlines");
         orderLines.add(new ObjectId(newOrderLine.getId()));
 
+        int totalPrice = orders.stream()
+                .mapToInt(order -> (order.getPrice() * order.getQuantity()))
+                .sum();
+
+        LocalDate date = LocalDate.now();
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        newOrderLine.setUser(new ObjectId(userId));
+        newOrderLine.setTotalPrice(totalPrice);
         newOrderLine.setOrders(orders);
+        newOrderLine.setDate(formattedDate);
         user.setOrderLine(orderLines);
 
         userRepository.save(user);
         orderRepository.save(newOrderLine);
+    }
+
+    @Override
+    public List<OrderLine> getAllUserOrders(String userId) {
+
+        return orderRepository.findOrderLinesByUser(new ObjectId(userId));
     }
 
 }

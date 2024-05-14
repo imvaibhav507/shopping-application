@@ -122,10 +122,13 @@ class _CartScreenState extends State<CartScreen> {
     for (var item in items) {
       final order = Order(
         orderId: uuid.v1(),
-        date: DateTime.now().toString(),
         productItem: item.productItem,
+        brand: item.brand,
+        name: item.name,
+        size: item.size,
         quantity: item.quantity,
-        totalPrice: itemTotal);
+        price: int.parse(item.price!),
+        picture: item.picture);
       orders.add(order);
     }
     return orders;

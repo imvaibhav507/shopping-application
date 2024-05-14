@@ -13,9 +13,12 @@ public class CartItem {
     private String itemId;
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId productItem;
+    private ObjectId product;
     private String price;
     private String picture;
     private int quantity;
     private Size size;
 
 }
+
+

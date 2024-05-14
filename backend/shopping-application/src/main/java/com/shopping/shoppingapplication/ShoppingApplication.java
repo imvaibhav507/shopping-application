@@ -9,6 +9,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @SpringBootApplication
 public class ShoppingApplication {
 
@@ -24,11 +27,11 @@ public class ShoppingApplication {
 		SpringApplication.run(ShoppingApplication.class, args);
 	}
 
-//	@Bean
-//	public CommandLineRunner runner() {
-//		return runner -> {
-//			System.out.println(productItemService.getPopularProductItems());
-//		};
-//	}
+	@Bean
+	public CommandLineRunner runner() {
+		return runner -> {
+
+		};
+	}
 
 }

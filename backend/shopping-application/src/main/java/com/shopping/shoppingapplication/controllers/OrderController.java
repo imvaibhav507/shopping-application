@@ -1,6 +1,7 @@
 package com.shopping.shoppingapplication.controllers;
 import com.shopping.shoppingapplication.dtos.ApiResponseModel;
 import com.shopping.shoppingapplication.models.Order;
+import com.shopping.shoppingapplication.models.OrderLine;
 import com.shopping.shoppingapplication.models.User;
 import com.shopping.shoppingapplication.services.CartService;
 import com.shopping.shoppingapplication.services.OrderService;
@@ -21,6 +22,14 @@ public class OrderController {
 
     private final OrderService orderService;
     private final CartService cartService;
+
+    @GetMapping()
+    ResponseEntity<ApiResponseModel> getAllOrdersForUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User fetchedUser = (User) authentication.getPrincipal();
+        List<OrderLine> fetchedOrderLines = orderService.getAllUserOrders(fetchedUser.getId());
+        return new ResponseEntity<>(new ApiResponseModel(200, fetchedOrderLines), HttpStatus.OK);
+    }
 
     @PostMapping
     ResponseEntity<ApiResponseModel> createOrdersForUser(

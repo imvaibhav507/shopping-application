@@ -5,6 +5,7 @@ import 'package:shop_app/screens/favorite/favorite_screen.dart';
 import 'package:shop_app/screens/my_account/my_account_screen.dart';
 import 'package:shop_app/screens/order_confirmation/order_confirmation_page.dart';
 import 'package:shop_app/screens/order_splash_screen.dart';
+import 'package:shop_app/screens/orders/orders_screen.dart';
 import 'package:shop_app/screens/products/products_screen.dart';
 import 'package:shop_app/screens/razorpay/razor_pay_page.dart';
 import 'screens/cart/cart_screen.dart';
@@ -40,6 +41,7 @@ import 'screens/splash/splash_screen.dart';
    static const String addressScreen = '/address_screen';
    static const String selectAddressScreen = '/select_address_screen';
    static const String razorPayScreen = '/razor_pay_screen';
+   static const String ordersScreen = '/orders_screen';
    static const String orderSplashScreen = '/order_splash_screen';
 
    static List<GetPage> pages = [
@@ -118,6 +120,10 @@ import 'screens/splash/splash_screen.dart';
      GetPage(
          name: razorPayScreen,
          page: () => RazorPayScreen()
+     ),
+     GetPage(
+         name: ordersScreen,
+         page: () => OrdersScreen()
      ),
      GetPage(
          name: orderSplashScreen,

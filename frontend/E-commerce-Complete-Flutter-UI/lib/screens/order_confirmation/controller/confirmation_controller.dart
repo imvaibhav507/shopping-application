@@ -46,7 +46,6 @@ class OrderConfirmationController extends GetxController {
     final args = await Get.arguments;
     itemTotal?.value = args['itemTotal'];
     orders?.value = args['orders'];
-    print(orders?.value);
     if(!(itemTotal!.value.isEmpty || itemTotal?.value == '')) {
       setPriceBreakdownLoading(false);
     }

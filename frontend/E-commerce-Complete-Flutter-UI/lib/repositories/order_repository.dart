@@ -9,4 +9,9 @@ class OrderRepository {
     dynamic response = _apiService.postApi(AppUrl.placeOrderApi, data);
     return response;
   }
+
+  Future<dynamic> getAllOrders() async {
+    dynamic response = _apiService.getApi(AppUrl.placeOrderApi);
+    return response;
+  }
 }

@@ -183,7 +183,8 @@ class DetailsScreen extends StatelessWidget {
   void onPressAddToCart(SizeVariant size) async {
     final cartItem = CartItem(
         itemId: uuid.v1(),
-        productItem: controller.itemModel.productId,
+        productItem: controller.itemModel.id,
+        product: controller.itemModel.productId,
         price: controller.itemModel.price,
         picture: controller.productItemDetailModelObj.value
             .itemDetails!.pictures!.first,

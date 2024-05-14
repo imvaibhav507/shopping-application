@@ -197,7 +197,8 @@ class FavouriteItemCard extends StatelessWidget {
 
     final cartItem = CartItem(
         itemId: uuid.v1(),
-        productItem: product.productId,
+        productItem: product.id,
+        product: product.productId,
         price: product.price,
         picture: product.picture,
         quantity: 1,
