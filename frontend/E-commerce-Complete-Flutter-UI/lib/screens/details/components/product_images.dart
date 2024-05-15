@@ -18,47 +18,49 @@ class _ProductImagesState extends State<ProductImages> {
   int selectedImage = 0;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          width: 360,
-          height: 445,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: CustomImageView(
-              imagePath: widget.images[selectedImage],
-              fit: BoxFit.cover,
-              radius: BorderRadius.circular(16),
-            ),
-          ),
-        ),
-        // SizedBox(height: 20),
-        Align(
-          alignment: Alignment.bottomCenter,
-          heightFactor: 9,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ...List.generate(
-                widget.images.length,
-                (index) => SmallProductImage(
-                  isSelected: index == selectedImage,
-                  press: () {
-                    setState(() {
-                      selectedImage = index;
-                    });
-                  },
-                  image: widget.images[index],
-                ),
+    return Center(
+      child: Stack(
+        children: [
+          SizedBox(
+            width: 360,
+            height: 445,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
               ),
-            ],
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: CustomImageView(
+                imagePath: widget.images[selectedImage],
+                fit: BoxFit.cover,
+                radius: BorderRadius.circular(16),
+              ),
+            ),
           ),
-        )
-      ],
+          // SizedBox(height: 20),
+          Align(
+            alignment: Alignment.bottomCenter,
+            heightFactor: 9,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...List.generate(
+                  widget.images.length,
+                  (index) => SmallProductImage(
+                    isSelected: index == selectedImage,
+                    press: () {
+                      setState(() {
+                        selectedImage = index;
+                      });
+                    },
+                    image: widget.images[index],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
