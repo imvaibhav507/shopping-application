@@ -62,30 +62,30 @@ class ProductCard extends StatelessWidget {
                     color: kPrimaryColor,
                   ),
                 ),
-                InkWell(
-                  borderRadius: BorderRadius.circular(50),
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    height: 24,
-                    width: 24,
-                    decoration: BoxDecoration(
-                      color: false
-                          ? kPrimaryColor.withOpacity(0.15)
-                          : kSecondaryColor.withOpacity(0.1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: SvgPicture.asset(
-                      "assets/icons/Heart Icon_2.svg",
-                      colorFilter: const ColorFilter.mode(
-                        // product.isFavourite
-                          false
-                              ? Color(0xFFFF4848)
-                              : Color(0xFFDBDEE4),
-                          BlendMode.srcIn),
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   borderRadius: BorderRadius.circular(50),
+                //   onTap: () {},
+                //   child: Container(
+                //     padding: const EdgeInsets.all(6),
+                //     height: 24,
+                //     width: 24,
+                //     decoration: BoxDecoration(
+                //       color: false
+                //           ? kPrimaryColor.withOpacity(0.15)
+                //           : kSecondaryColor.withOpacity(0.1),
+                //       shape: BoxShape.circle,
+                //     ),
+                //     child: SvgPicture.asset(
+                //       "assets/icons/Heart Icon_2.svg",
+                //       colorFilter: const ColorFilter.mode(
+                //         // product.isFavourite
+                //           false
+                //               ? Color(0xFFFF4848)
+                //               : Color(0xFFDBDEE4),
+                //           BlendMode.srcIn),
+                //     ),
+                //   ),
+                // ),
               ],
             )
           ],

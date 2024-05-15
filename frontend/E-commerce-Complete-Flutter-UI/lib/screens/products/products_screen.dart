@@ -11,7 +11,6 @@ class ProductsScreen extends StatelessWidget {
 
   ProductsController controller = Get.put(ProductsController());
 
-  static String routeName = "/products";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

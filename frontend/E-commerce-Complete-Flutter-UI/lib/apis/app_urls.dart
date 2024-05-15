@@ -1,5 +1,6 @@
 class AppUrl {
-  static const String hostUrl = 'http://192.168.1.7:8080';
+  static const String hostUrl = 'https://shopping-application-uig0.onrender.com';
+  // static const String hostUrl = 'http://192.168.1.7:8080';
   static const String baseUrl = '$hostUrl/api/v1';
 
   static const String signUpApi = '$baseUrl/auth/register';

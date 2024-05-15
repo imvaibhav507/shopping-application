@@ -21,18 +21,18 @@ class _ProductImagesState extends State<ProductImages> {
     return Stack(
       children: [
         SizedBox(
-          child: AspectRatio(
-            aspectRatio: 0.9,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: CustomImageView(
-                imagePath: widget.images[selectedImage],
-                fit: BoxFit.cover,
-                radius: BorderRadius.circular(16),
-              ),
+          width: 360,
+          height: 445,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: CustomImageView(
+              imagePath: widget.images[selectedImage],
+              fit: BoxFit.cover,
+              radius: BorderRadius.circular(16),
             ),
           ),
         ),

@@ -33,8 +33,11 @@ class OrdersScreen extends StatelessWidget {
                       ],
                     ));
                 }
-                return ListView.builder(
+                return ListView.separated(
                   itemCount: controller.orderLinesModelObj.value.orderLines?.length ?? 0,
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 4);
+                  },
                   itemBuilder: (context, index) {
                     var orderLine = controller.orderLinesModelObj.value.orderLines![index];
                     return OrderLineCard(orderLine: orderLine);

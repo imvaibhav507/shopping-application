@@ -3,10 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/main.dart';
+import 'package:shop_app/routes.dart';
 import 'package:shop_app/screens/details/controller/product_details_controller.dart';
 import 'package:shop_app/screens/products/models/product_item_model.dart';
 import '../../models/Cart.dart';
 import '../../models/size_variant.dart';
+import '../home/components/icon_btn_with_counter.dart';
 import 'components/color_dots.dart';
 import 'components/product_description.dart';
 import 'components/product_images.dart';
@@ -74,6 +76,14 @@ class DetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.favouriteScreen);
+                },
+                  borderRadius: BorderRadius.circular(50),
+                  child: SvgPicture.asset("assets/icons/Heart Icon.svg", color: const Color(0xFFFF4848),)
+              ),
+              const SizedBox(width: 16,)
             ],
           ),
         ],
@@ -139,40 +149,61 @@ class DetailsScreen extends StatelessWidget {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Obx(
-              () => ElevatedButton(
-                onPressed: () {
-                  if (controller.isItemInCart.isTrue) {
-                    return;
-                  } else if (controller.selectedSize.value == -1) {
-                    print("Please select size");
-                    return;
-                  }
-                  final sizes = controller.productItemDetailModelObj.value
-                      .itemDetails!.sizeVariants!;
-                  onPressAddToCart(sizes[controller.selectedSize.value]);
-                },
-                style: (controller.isItemInCart.isTrue)
-                    ? ButtonStyle(
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.grey.shade100),
-                        side: MaterialStateBorderSide.resolveWith((states) =>
-                            const BorderSide(color: kPrimaryColor, width: 2)))
-                    : null,
-                child: Obx(() => (controller.isCartButtonLoading.isFalse)
-                    ? Text(
-                        (controller.isItemInCart.isFalse)
-                            ? "Add To Cart"
-                            : "Item added",
-                        style: (controller.isItemInCart.isTrue)
-                            ? Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(color: kPrimaryColor)
-                            : null,
-                      )
-                    : const CircularProgressIndicator()),
-              ),
+            child: Row(
+              children: [
+                Obx(
+                  () => Expanded(
+                    flex: 7,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (controller.isItemInCart.isTrue) {
+                          return;
+                        } else if (controller.selectedSize.value == -1) {
+                          print("Please select size");
+                          return;
+                        }
+                        final sizes = controller.productItemDetailModelObj.value
+                            .itemDetails!.sizeVariants!;
+                        onPressAddToCart(sizes[controller.selectedSize.value]);
+                      },
+                      style: (controller.isItemInCart.isTrue)
+                          ? ButtonStyle(
+                              backgroundColor: MaterialStateColor.resolveWith(
+                                  (states) => Colors.grey.shade100),
+                              side: MaterialStateBorderSide.resolveWith((states) =>
+                                  const BorderSide(color: kPrimaryColor, width: 2)))
+                          : null,
+                      child: Obx(() => (controller.isCartButtonLoading.isFalse)
+                          ? Text(
+                              (controller.isItemInCart.isFalse)
+                                  ? "Add To Cart"
+                                  : "Item added",
+                              style: (controller.isItemInCart.isTrue)
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(color: kPrimaryColor)
+                                  : null,
+                            )
+                          : const CircularProgressIndicator()),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 6,),
+                Expanded(
+                  flex: 2,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateColor.resolveWith((states) => const Color(0xFFF5F6F9)),
+                      side: MaterialStateBorderSide.resolveWith((states) => BorderSide(color: Colors.grey.shade400, width: 2))
+                    ),
+                      child: SvgPicture.asset("assets/icons/Cart Icon.svg", color: Colors.black54,),
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.cartScreen);
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ),

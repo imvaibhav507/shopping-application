@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/components/rounded_image_card.dart';
 import 'package:shop_app/models/orders.dart';
+import 'package:shop_app/models/size_variant.dart';
+import 'package:shop_app/routes.dart';
+import 'package:shop_app/screens/details/components/size_dots.dart';
+import 'package:shop_app/screens/products/models/product_item_model.dart';
 import '../../../constants.dart';
 
 class OrderLineCard extends StatelessWidget {
@@ -15,6 +19,9 @@ class OrderLineCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      collapsedBackgroundColor: Colors.grey.shade100,
+      collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      tilePadding: const EdgeInsets.all(10),
       title: Row(
         children: [
           RoundedImageCard(imagePath: orderLine.orders?.first.picture),
@@ -55,7 +62,7 @@ class OrderLineCard extends StatelessWidget {
                           child: Text(
                               "Qty ${getTotalItemsCount()}",
                               style: Theme.of(context).textTheme.bodyMedium
-                                  ?.copyWith(color: Colors.deepOrange, fontWeight: FontWeight.bold)),
+                                  ?.copyWith(color: kPrimaryColor, fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -84,12 +91,19 @@ class OrderLineCard extends StatelessWidget {
                     Text('${order.brand}'.toUpperCase(), style: Theme.of(context).textTheme.labelMedium,),
                     Text('${order.name}', style: Theme.of(context).textTheme.labelMedium,),
                     Text('MRP ${order.price}'.toUpperCase(), style: Theme.of(context).textTheme.labelMedium
-                        ?.copyWith(color: Colors.deepOrange, fontWeight: FontWeight.bold),)
+                        ?.copyWith(color: kPrimaryColor, fontWeight: FontWeight.bold),)
                   ],
                 ),
-                trailing: Text('${order.quantity} Items',
-                  style: Theme.of(context).textTheme.labelMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizeDot(sizeVariant: SizeVariant(size: order.size), width: 22,),
+                    const SizedBox(width: 3,),
+                    Text('Qty ${order.quantity}',
+                      style: Theme.of(context).textTheme.labelMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),),
+                  ],
+                ),
               ),
             );
           }

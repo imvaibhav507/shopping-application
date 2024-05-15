@@ -28,7 +28,6 @@ class SpecialOffers extends StatelessWidget {
                 category: "Smartphone",
                 numOfBrands: 18,
                 press: () {
-                  Navigator.pushNamed(context, ProductsScreen.routeName);
                 },
               ),
               SpecialOfferCard(
@@ -36,7 +35,6 @@ class SpecialOffers extends StatelessWidget {
                 category: "Fashion",
                 numOfBrands: 24,
                 press: () {
-                  Navigator.pushNamed(context, ProductsScreen.routeName);
                 },
               ),
               const SizedBox(width: 20),

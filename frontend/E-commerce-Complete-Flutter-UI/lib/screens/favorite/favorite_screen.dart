@@ -25,25 +25,32 @@ class FavoriteScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Obx(
-                  ()=> GridView.builder(
-                    itemCount: controller.productItemListObj.value.productItemList?.length ?? 0,
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 0.53,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 16,
-                    ),
-                    itemBuilder: (context, index) =>
-                        FavouriteItemCard(
-                      product: controller
-                          .productItemListObj.value.productItemList![index],
-                      onPress: () {
-                        final item = controller
-                            .productItemListObj.value.productItemList![index];
-                        Get.toNamed(AppRoutes.detailsScreen, arguments: item);
-                      },
-                    ),
-                  ),
+                  () => (controller.isLoading.isFalse)
+                      ? GridView.builder(
+                          itemCount: controller.productItemListObj.value
+                                  .productItemList?.length ??
+                              0,
+                          gridDelegate:
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            childAspectRatio: 0.53,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing: 16,
+                          ),
+                          itemBuilder: (context, index) => FavouriteItemCard(
+                            product: controller.productItemListObj.value
+                                .productItemList![index],
+                            onPress: () {
+                              final item = controller.productItemListObj.value
+                                  .productItemList![index];
+                              Get.toNamed(AppRoutes.detailsScreen,
+                                  arguments: item);
+                            },
+                          ),
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                 ),
               ),
             )
