@@ -16,18 +16,21 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            children: [
-              HomeHeader(),
-              DiscountBanner(),
-              Categories(),
-              SpecialOffers(),
-              SizedBox(height: 20),
-              PopularProducts(),
-              SizedBox(height: 20),
-            ],
+        child: RefreshIndicator(
+          onRefresh: () => controller.getPopularProducts(),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              children: [
+                HomeHeader(),
+                DiscountBanner(),
+                Categories(),
+                SpecialOffers(),
+                SizedBox(height: 20),
+                PopularProducts(),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

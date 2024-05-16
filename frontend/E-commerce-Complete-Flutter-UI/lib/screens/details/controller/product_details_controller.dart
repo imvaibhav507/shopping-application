@@ -12,7 +12,8 @@ class ProductDetailsController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    itemModel = await Get.arguments!;
+    itemModel = await Get.arguments;
+    print(itemModel.toJson());
     getProductDetails(itemModel.id!, itemModel.productId!);
   }
 

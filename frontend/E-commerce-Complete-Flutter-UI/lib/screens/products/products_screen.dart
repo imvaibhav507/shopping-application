@@ -21,36 +21,39 @@ class ProductsScreen extends StatelessWidget {
                 .processStringRegExp(controller.category.value.name, '_', ' ')
                 .capitalizeFirst!)),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Obx(() {
-            if (controller.productItemListObj.value.productItemList == null ||
-                controller.productItemListObj.value.productItemList!.isEmpty) {
-              return const Center(
-                child: CircularProgressIndicator(),
+      body: RefreshIndicator(
+        onRefresh: () => controller.getProductsByCategory(),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Obx(() {
+              if (controller.productItemListObj.value.productItemList == null ||
+                  controller.productItemListObj.value.productItemList!.isEmpty) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return GridView.builder(
+                itemCount:
+                    controller.productItemListObj.value.productItemList?.length,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 0.58,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) => ProductCard(
+                    product: controller
+                        .productItemListObj.value.productItemList![index],
+                    onPress: () {
+                      final item = controller
+                          .productItemListObj.value.productItemList![index];
+                      print(item.toJson());
+                      Get.toNamed(AppRoutes.detailsScreen, arguments: item);
+                    }),
               );
-            }
-            return GridView.builder(
-              itemCount:
-                  controller.productItemListObj.value.productItemList?.length,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.58,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 16,
-              ),
-              itemBuilder: (context, index) => ProductCard(
-                  product: controller
-                      .productItemListObj.value.productItemList![index],
-                  onPress: () {
-                    final item = controller
-                        .productItemListObj.value.productItemList![index];
-                    print(item.toJson());
-                    Get.toNamed(AppRoutes.detailsScreen, arguments: item);
-                  }),
-            );
-          }),
+            }),
+          ),
         ),
       ),
     );

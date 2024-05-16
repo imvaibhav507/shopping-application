@@ -22,7 +22,6 @@ class _ProductImagesState extends State<ProductImages> {
       child: Stack(
         children: [
           SizedBox(
-            width: 360,
             height: 445,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),

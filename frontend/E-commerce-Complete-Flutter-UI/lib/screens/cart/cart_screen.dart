@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:shop_app/core/utils/custom_image_view.dart';
 import 'package:shop_app/main.dart';
 import 'package:shop_app/models/cart_model.dart';
+import 'package:shop_app/routes.dart';
 import 'package:shop_app/screens/cart/controller/cart_controller.dart';
+import 'package:shop_app/screens/products/models/product_item_model.dart';
 import '../../models/orders.dart';
 import 'components/cart_card.dart';
 import 'components/check_out_card.dart';
@@ -89,7 +91,9 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ),
                 ),
-                child: CartCard(cartItem: items[index]),
+                child: InkWell(
+                  // onTap: ()=> Get.toNamed(AppRoutes.detailsScreen, arguments: ProductItemModel(id: items[index]., productId: items[index].productItem)),
+                    child: CartCard(cartItem: items[index])),
               ),
             ),
           );
